@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Product from "./Product";
+import { useFetch } from "./custom-hooks/useFetch";
 
-function App() {
+const url = "https://course-api.com/react-prop-types-example";
+
+const App = () => {
+  const { products } = useFetch(url);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <h1>Products</h1>
+      <section>
+        {products.map((product) => {
+          return <Product key={product.id} {...product} />;
+        })}
+      </section>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
